@@ -1,0 +1,47 @@
+.consultation__container {
+    margin: 20px 5%;
+}
+
+.consultation__header {
+    display: flex;
+}
+
+.consultation__date {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.consultation__address {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.consultation__info{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.signup-cons-btn {
+    margin-top: 20px;
+    height: 40px;
+    width: 200px;
+    background-color: #1E1E1E;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+}
+
+.signup-cons-btn:hover {
+    background-color: #fff;
+    border:  1px solid black !important;
+    color: #1E1E1E;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}

@@ -1,0 +1,6 @@
+.profile__container {
+    margin: 20px 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

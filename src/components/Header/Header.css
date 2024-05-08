@@ -1,0 +1,27 @@
+.header {
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    height: 100px;
+}
+
+.navigation-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    list-style: none;
+}
+
+.navigation-link {
+    text-decoration: none;
+    color: #fff;
+    font-family: Gilroy-bold;
+}
+
+.navigation-link:hover {
+    text-decoration: underline;
+}

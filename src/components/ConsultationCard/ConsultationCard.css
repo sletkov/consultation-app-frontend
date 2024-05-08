@@ -1,0 +1,70 @@
+/* Цвета политеха
+Главные
+Черный #000
+Белый #fff
+
+Дополнительные
+Красный #E63246
+Фиолетовый #874BA0
+Зеленый #55B432
+Синий #4B6EB9
+
+*/
+
+.consultation__card {
+    width: 49%;
+    /* height: 300px; */
+    height: auto;
+    background-color: #1E1E1E;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 10px 10px #dedede;
+}
+
+.consultation {
+    background-color: #4B6EB9;
+}
+
+.practicing {
+    background-color: #874BA0;
+} 
+
+.retake {
+    background-color: #E63246;
+}
+
+
+.consultation__card:hover {
+    transform: translateY(-10px)
+}
+
+.consultation-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.consultation-card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#signup-on-cons-btn {
+    color: #fff;
+    background: none;
+    border: 1px solid #fff;
+    padding: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#signup-on-cons-btn:hover {
+    background: #fff;
+    border:none;
+    color: #000;
+}
+

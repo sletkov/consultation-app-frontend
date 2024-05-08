@@ -1,0 +1,37 @@
+.schedules__container {
+    margin: 20px 5%;
+}
+
+.schedules__form {
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+
+.schedules {
+    margin-top: 20px;
+}
+
+.schedules__search {
+    width: 100%;
+    height: 40px;
+    padding: 5px;
+}
+
+.schedules__search-btn {
+    width: 120px;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+}
+
+.schedules__search-btn:hover {
+    width: 120px;
+    border: none;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+    border: 1px solid #000;
+}
