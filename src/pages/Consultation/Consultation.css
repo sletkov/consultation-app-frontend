@@ -27,6 +27,36 @@
     gap: 5px;
 }
 
+.consultation-link {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.consultation__info--header, .consultation__address--header, .consultation__date--header, .consultation-link--header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.edit-btn {
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+.edit-btn:hover {
+    transform: scale(1.1);
+}
+
+.edit-icon {
+    width: 100%;
+    height: 100%;
+}
+
 .signup-cons-btn {
     margin-top: 20px;
     height: 40px;
@@ -44,4 +74,42 @@
     border: none;
     padding: 5px 10px;
     cursor: pointer;
+}
+
+.delete-cons-btn {
+    background-color: #E63246;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.delete-cons-btn:hover {
+    background-color: #fff;
+    color: #E63246;
+    border: 2px solid #E63246;
+    padding: 5px;
+}
+
+.students-list {
+    margin: 20px 5%;
+}
+
+.edit-date__form, .edit-address__form, .edit-info__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.description-textarea {
+    width: 100%;
+    height: auto;
+}
+
+.edit-date__form-content, .edit-address__form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }

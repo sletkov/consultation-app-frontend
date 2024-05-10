@@ -17,7 +17,7 @@ export const Schedules = () => {
                     <button className="schedules__search-btn">Найти</button>
                 </form>
 
-                <div className='schedules'>
+                <div className='schedules-box'>
                     {
                         
                         schedules.length != 0 ?

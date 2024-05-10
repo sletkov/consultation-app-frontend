@@ -2,6 +2,7 @@ import "./Profile.css"
 import { Header } from "../../components/Header/Header";
 import { useState, useEffect } from "react";
 import axios from 'axios'
+import { TiEdit } from "react-icons/ti";
 
 export const Profile = () => {
     const [profile, setProfile] = useState({})
@@ -27,9 +28,9 @@ export const Profile = () => {
             <div className="profile__container">
                 <h1>Мой профиль</h1>
                 {/* <button>Редактировать</button> */}
-                <p>ФИО: {profile.full_name}</p>
-                <p>Роль: {profile.role=="teacher"? "Преподаватель":"Cтудент"}</p>
-                <p>Email: {profile.email}</p>
+                <p>ФИО: {profile.full_name} <button className="edit-btn"><TiEdit className="edit-icon"/></button></p>
+                <p>Роль: {profile.role=="teacher"? "Преподаватель":"Cтудент"} <button className="edit-btn"></button></p>
+                <p>Email: {profile.email} <button className="edit-btn"><TiEdit className="edit-icon"/></button></p>
             </div>
         </div>
     );

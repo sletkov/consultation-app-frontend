@@ -10,6 +10,15 @@ export function ConsultationCard({consultation}) {
     const [userRole, setUserRole] = useState("")
     const [signedUp, setSignedUp] = useState([])
 
+    function SignedUp() {
+        if (consultation.students) {
+            let students = consultation.students
+            return students.some(student => student.id == localStorage.getItem("userID"));
+        }
+        return false
+    }
+    
+
     async function SignupOnConsultation() {
         let body = JSON.stringify({
             student_id: localStorage.getItem("userID"),
@@ -65,10 +74,11 @@ export function ConsultationCard({consultation}) {
                 <p>Кол-во записей: {consultation.students_count}/{consultation.limit}</p>
             </div>
             {
-                userRole == "student" && signedUp.indexOf(consultation.id > -1)
+                userRole == "student" && !SignedUp()
                 ?
                 <button id='signup-on-cons-btn' onClick={() => SignupOnConsultation()}>Записаться</button>
                 :
+                // <p className='already-signedup'>Вы уже записались</p>
                 <></>
             }
         </Link>

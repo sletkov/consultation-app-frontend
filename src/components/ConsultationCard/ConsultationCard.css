@@ -68,3 +68,10 @@
     color: #000;
 }
 
+.already-signedup {
+    border: 2px solid #fff;
+    margin-top: 10px;
+    padding: 5px;
+    width: fit-content;
+}
+

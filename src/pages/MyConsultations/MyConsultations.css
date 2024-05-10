@@ -1,3 +1,56 @@
-.my-consultations-page__header{
+.my-consultations__header{
     margin: 20px 5%;
+    display: flex;
+    justify-content: space-between;
 }
+
+.create-consultation-btn {
+    background-color: #1E1E1E;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+}
+
+.create-consultation-btn:hover {
+    background-color: #fff;
+    border:  1px solid black !important;
+    color: #1E1E1E;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.my-consultations__btns {
+    margin: 20px 5%;
+    display: flex;
+    gap: 30px;
+}
+
+.my-consultations__active-btn, .my-consultations__draft-btn {
+    height: 40px;
+    width: 120px;
+    cursor: pointer;
+    background: #000;
+    color: #fff;
+    /* padding: 5px; */
+    border: none;
+}
+
+.my-consultations__active-btn:hover, .my-consultations__draft-btn:hover {
+    background: #fff;
+    color: #000;
+    border: 2px solid #000;
+}
+
+.active-btn {
+    height: 40px;
+    width: 120px;
+    background: #fff;
+    color: #000;
+    border: 2px solid #000;
+}
+
+.disabled-btn {
+
+}
+

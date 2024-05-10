@@ -33,9 +33,10 @@ export function Login() {
         var response = await axios.post("http://localhost:8080/login", body, {withCredentials:true})
         console.log(response.data)
         console.log(response.status)
-        if (response.status == 200 && response.data !== undefined) {
+        if (response.status == 200 && response.data) {
             localStorage.setItem("userID", response.data.id)
             localStorage.setItem("userRole", response.data.role)
+            localStorage.setItem("userName", response.data.full_name)
         }
         navigate("/consultations")
     }

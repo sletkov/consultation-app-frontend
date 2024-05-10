@@ -3,9 +3,13 @@ import { Header } from "../../components/Header/Header";
 import { useEffect, useState } from "react";
 import axios from 'axios'
 import { ConsultationCard } from "../../components/ConsultationCard/ConsultationCard";
+import { CreateConsultationForm } from "../../components/CreateConsultationForm/CreateConsultationForm";
+import { MdDrafts } from "react-icons/md";
 
 export const MyConsultations = () => {
     const [consultations, setConsultations] = useState([])
+    const [modalActive, setModalActive] = useState(false)
+    const [showDrafts, setShowDrafts] = useState(false)
 
     async function fetchConsultations() {
         var id = localStorage.getItem("userID")
@@ -26,6 +30,11 @@ export const MyConsultations = () => {
         console.log(consultations)
     }
 
+    function ShowDrafts() {
+        let drafts = consultations.filter(cons => cons.draft == true)
+        setConsultations(drafts) 
+    }
+
 
     useEffect(()=>{
         fetchConsultations()
@@ -34,7 +43,31 @@ export const MyConsultations = () => {
     return(
         <div className="my-consultations-page">
             <Header/>
-            <h1 className="my-consultations-page__header">Мои консультации</h1>
+
+            <div className='my-consultations__header'>
+                <h1>Мои консультации</h1>
+                {
+                    localStorage.getItem("userRole") == "teacher"
+                    ? 
+                    <button onClick={() => {setModalActive(true)}} className="create-consultation-btn">Создать консультацию</button>
+                    :
+                    <></>
+                }
+            </div>
+
+            <div className="my-consultations__btns">
+                <button className={!showDrafts ? "active-btn": "my-consultations__active-btn"} onClick={()=>{
+                    fetchConsultations()
+                    setShowDrafts(false)
+                }}>Активные</button>
+
+                <button className={showDrafts ? "active-btn": "my-consultations__draft-btn"} onClick={()=>{
+                    ShowDrafts()
+                    setShowDrafts(true)
+                }}>Черновики</button>
+            </div>
+
+            <CreateConsultationForm active={modalActive} setActive={setModalActive}/>
 
             <div className="consultations__container">
                 {

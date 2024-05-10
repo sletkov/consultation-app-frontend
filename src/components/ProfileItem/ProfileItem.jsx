@@ -14,6 +14,7 @@ export const ProfileItem = () => {
         Cookies.remove("consultation-app")
         localStorage.removeItem("userID")
         localStorage.removeItem("userRole")
+        localStorage.removeItem("userName")
         navigate("/login")
     }
 

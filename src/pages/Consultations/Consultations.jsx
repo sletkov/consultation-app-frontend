@@ -4,6 +4,7 @@ import { ConsultationCard } from "../../components/ConsultationCard/Consultation
 import { CreateConsultationForm } from '../../components/CreateConsultationForm/CreateConsultationForm';
 import { useEffect, useState } from 'react';
 import axios from 'axios'
+import { ConsultationService } from '../../API/ConsultationService';
 
 
 export function Consultations() {
@@ -37,6 +38,8 @@ export function Consultations() {
         }
         console.log(consultations)
     }
+ 
+
     
     useEffect(() => {
         fetchConsultations()
@@ -69,7 +72,8 @@ export function Consultations() {
 
     //Может быть поиск и фильтры в отдельный компонент?
     function searchConsultations(title) {
-        var searchedCons  = consultations.filter(item => item.title.includes(title))
+        // includes(title
+        var searchedCons = consultations.filter(item => item.title.toLowerCase().trim().includes(title.toLowerCase().trim()))
         setConsultations(searchedCons)
         if (title.length == 0) {
             fetchConsultations()
@@ -89,7 +93,7 @@ export function Consultations() {
         var searchedCons  = consultations.filter(item => item.type == type)
         setConsultations(searchedCons)
         if (type == "Любой тип") {
-            fetchConsultations()
+            fetchConsultations()   
         }
     }
 

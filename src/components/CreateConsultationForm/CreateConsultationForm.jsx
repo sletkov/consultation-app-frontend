@@ -13,7 +13,7 @@ export const CreateConsultationForm = ({active, setActive}) => {
     const [type, setType] = useState("Консультация")
     const [date, setDate] = useState("")
     const [time, setTime] = useState("")
-    const [campus, setCampus] = useState("БС")
+    const [campus, setCampus] = useState("")
     const [classroom, setClassroom] = useState("")
     const [link, setLink] = useState("")
     const [limit, setLimit] = useState(10)
@@ -43,7 +43,8 @@ export const CreateConsultationForm = ({active, setActive}) => {
 
     
     async function CreateConsultation() {
-        var teacherID = localStorage.getItem("userID")
+        let teacherID = localStorage.getItem("userID")
+        let teacherName = localStorage.getItem("userName")
         let body = JSON.stringify({
             title: title,
             description: description,
@@ -56,6 +57,7 @@ export const CreateConsultationForm = ({active, setActive}) => {
             classroom: classroom,
             link: link,
             limit: limit,
+            teacher_name: teacherName,
         })
 
         console.log(body)
