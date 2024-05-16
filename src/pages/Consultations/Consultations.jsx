@@ -1,7 +1,9 @@
 import './Consultations.css'
+import { IoMdClose } from "react-icons/io";
 import { Header } from "../../components/Header/Header";
 import { ConsultationCard } from "../../components/ConsultationCard/ConsultationCard";
 import { CreateConsultationForm } from '../../components/CreateConsultationForm/CreateConsultationForm';
+import { Popup } from "../../components/UI/Popup/Popup";
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import { ConsultationService } from '../../API/ConsultationService';
@@ -13,6 +15,8 @@ export function Consultations() {
     const [userID, setUserID] = useState("")
     const [consultationID, setConsultationID] = useState("")
     const [userRole, setUserRole] = useState("")
+    const [successCreatePopupActive, setSuccessCreatePopupActive] = useState(false)
+    const [successSignupPopupActive, setSuccessSignupPopupActive] = useState(false)
     const [searchConsultation, setSearchConsultation] = useState({
         title: "",
         campus: "",
@@ -48,27 +52,27 @@ export function Consultations() {
         console.log("useEffect")
     },[])
 
-    async function SignupOnConsultation() {
-        let body = JSON.stringify({
-            user_id: userID,
-            consultation_id: consultationID,
-        })
-        const createResponse = await fetch('http://localhost:8080/private/consultations/sign-up', {
-            method: "POST",
-            mode: "no-cors",
-            headers: {
-                'Content-Type': 'application/json'
-              },
-            body: body,
-            credentials: 'include'
-        }).then((response)=>{
-            return response.json
-        })
+    // async function SignupOnConsultation() {
+    //     let body = JSON.stringify({
+    //         user_id: userID,
+    //         consultation_id: consultationID,
+    //     })
+    //     const createResponse = await fetch('http://localhost:8080/private/consultations/sign-up', {
+    //         method: "POST",
+    //         mode: "no-cors",
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //           },
+    //         body: body,
+    //         credentials: 'include'
+    //     }).then((response)=>{
+    //         return response.json
+    //     })
 
-        if (createResponse && createResponse !== undefined){
-           console.log("Success sign-up")
-        }
-    }
+    //     if (createResponse && createResponse !== undefined){
+    //        console.log("Success sign-up")
+    //     }
+    // }
 
     //Может быть поиск и фильтры в отдельный компонент?
     function searchConsultations(title) {
@@ -117,6 +121,15 @@ export function Consultations() {
         <div className="consulations">
             <Header/>
 
+            <Popup active={successCreatePopupActive} setActive={setSuccessCreatePopupActive} className="success-create-popup">
+                    <p>Вы успешно создали консультацию</p>
+                    <IoMdClose className="close-icon" onClick={()=>setSuccessCreatePopupActive(false)}/>
+            </Popup>
+
+            <Popup active={successSignupPopupActive} setActive={setSuccessSignupPopupActive} className="success-signup-popup">
+                    <p>Вы успешно записались на консультацию</p>
+                    <IoMdClose className="close-icon" onClick={()=>setSuccessSignupPopupActive(false)}/>
+            </Popup>
             <div className='consultations__header'>
                 <h1>Консультации</h1>
                 {
@@ -168,13 +181,13 @@ export function Consultations() {
                 </select>
             </div>
            
-            <CreateConsultationForm active={modalActive} setActive={setModalActive}/>
+            <CreateConsultationForm active={modalActive} setActive={setModalActive} setSuccessCreatePopupActive={setSuccessCreatePopupActive}/>
 
             {
             consultations.length != 0 ?
             <div className="consultations__container">
                 {consultations.map((cons) => {
-                    return <ConsultationCard key={cons.id} consultation = {cons}/>
+                    return <ConsultationCard key={cons.id} consultation = {cons} setSuccessSignupPopupActive={setSuccessSignupPopupActive}/>
                 })}
             </div>
             :

@@ -53,19 +53,26 @@ export const MyConsultations = () => {
                     :
                     <></>
                 }
-            </div>
 
-            <div className="my-consultations__btns">
-                <button className={!showDrafts ? "active-btn": "my-consultations__active-btn"} onClick={()=>{
-                    fetchConsultations()
-                    setShowDrafts(false)
-                }}>Активные</button>
-
-                <button className={showDrafts ? "active-btn": "my-consultations__draft-btn"} onClick={()=>{
-                    ShowDrafts()
-                    setShowDrafts(true)
-                }}>Черновики</button>
             </div>
+            {
+                localStorage.getItem("userRole") == "teacher"
+                ?
+                <div className="my-consultations__btns">
+                    <button className={!showDrafts ? "active-btn": "my-consultations__active-btn"} onClick={()=>{
+                        fetchConsultations()
+                        setShowDrafts(false)
+                    }}>Активные</button>
+
+                    <button className={showDrafts ? "active-btn": "my-consultations__draft-btn"} onClick={()=>{
+                        ShowDrafts()
+                        setShowDrafts(true)
+                    }}>Черновики</button>
+                </div>
+                :
+                <></>
+            }
+           
 
             <CreateConsultationForm active={modalActive} setActive={setModalActive}/>
 

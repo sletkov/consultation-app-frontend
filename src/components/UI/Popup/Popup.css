@@ -1,0 +1,42 @@
+.popup {
+    padding: 20px;
+    width: 500px;
+    height: 250px;
+    /* position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+    pointer-events: none;
+    transition: 0.5s;
+    z-index: 1000;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+
+}
+
+.popup.active{
+    display: flex;
+    pointer-events: all;
+}
+
+.popup__content{
+    padding: 20px;
+    border-radius: 3px;
+    background-color: white;
+    transform: scale(0.5);
+    transition: 0.4s all;
+
+}
+
+.popup__content.active{
+    transform: scale(1);
+}

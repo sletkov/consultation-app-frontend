@@ -4,6 +4,13 @@
 
 .consultation__header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.consultation__header--title {
+    display: flex;
+ 
 }
 
 .consultation__date {
@@ -57,7 +64,7 @@
     height: 100%;
 }
 
-.signup-cons-btn {
+.signup-cons-btn, .public-cons-btn {
     margin-top: 20px;
     height: 40px;
     width: 200px;
@@ -67,7 +74,7 @@
     padding: 5px 10px;
 }
 
-.signup-cons-btn:hover {
+.signup-cons-btn:hover, .public-cons-btn:hover {
     background-color: #fff;
     border:  1px solid black !important;
     color: #1E1E1E;
@@ -77,6 +84,8 @@
 }
 
 .delete-cons-btn {
+    height: 40px;
+    width: 120px;
     background-color: #E63246;
     color: #fff;
     border: none;
@@ -105,11 +114,89 @@
 
 .description-textarea {
     width: 100%;
-    height: auto;
+    height: fit-content;
 }
 
 .edit-date__form-content, .edit-address__form-content {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.update-btn {
+    height: 30px;
+    width: 150px;
+    background-color: #4B6EB9;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+}
+
+
+.update-btn:hover {
+    background-color: #fff;
+    border:  1px solid #4B6EB9 !important;
+    color: #4B6EB9;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.cancel-edit-btn, .cancel-delete-btn {
+    height: 30px;
+    width: 150px;
+    background-color: #1E1E1E;
+    color: #fff;
+    padding: 5px 10px;
+}
+
+.cancel-delete-btn {
+    height: 40px;
+    width: 120px;
+}
+
+.cancel-edit-btn:hover, .cancel-delete-btn:hover {
+    background-color: #fff;
+    border:  1px solid black !important;
+    color:  #1E1E1E;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.date__container, .time__container, .address__container, .classroom__container {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.edit-btns {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.delete-btns{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+
+.success-update-popup {
+    background-color:#4B6EB9;
+    color: #fff;
+}
+
+.close-icon {
+    align-self: start;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.close-icon:hover {
+    transform: scale(1.1);
 }

@@ -4,7 +4,7 @@ import { IoMdClose } from "react-icons/io";
 import { useState } from "react";
 import axios from "axios";
 
-export const CreateConsultationForm = ({active, setActive}) => {
+export const CreateConsultationForm = ({active, setActive, setSuccessCreatePopupActive}) => {
     const [consultation, setConsultation] = useState({})
 
     const [title, setTitle] = useState("")
@@ -17,6 +17,7 @@ export const CreateConsultationForm = ({active, setActive}) => {
     const [classroom, setClassroom] = useState("")
     const [link, setLink] = useState("")
     const [limit, setLimit] = useState(10)
+    const [draft, setDraft] = useState(false)
 
     // teacherID = 
     // async function CreateConsultation(){
@@ -58,6 +59,7 @@ export const CreateConsultationForm = ({active, setActive}) => {
             link: link,
             limit: limit,
             teacher_name: teacherName,
+            draft:draft,
         })
 
         console.log(body)
@@ -75,7 +77,9 @@ export const CreateConsultationForm = ({active, setActive}) => {
         })
 
         if (createResponse && createResponse !== undefined){
-           console.log("Success create consultation")
+            setSuccessCreatePopupActive ? setSuccessCreatePopupActive(true):
+       
+            console.log("Success create consultation")
         }
         
     }
@@ -83,7 +87,16 @@ export const CreateConsultationForm = ({active, setActive}) => {
     return (
         <Modal active={active} setActive={setActive} className="create-consultation-form">
             <div className="create-consultation-form__header">
-                <h2>Создать Консультацию</h2>
+                <div className="create-consultation-form__header--left">
+                    <h2>Создать Консультацию</h2>
+                    <label className="draft-label">
+                        Черновик
+                        <input type="checkbox" checked={draft} onChange={(e) => {
+                            setDraft(e.target.checked)
+                            console.log(draft)
+                        }} className="draft-input"/>
+                    </label>
+                </div>
                 <button onClick={() => setActive(false)} className="close-btn"><IoMdClose/></button>
             </div>
             <form className="create-consultation-form" onSubmit={(e) => e.preventDefault()}>

@@ -3,7 +3,7 @@ import { useState, useEffect} from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 
-export function ConsultationCard({consultation}) {
+export function ConsultationCard({consultation, setSuccessSignupPopupActive}) {
     let navigate = useNavigate();
 
     const [userID, setUserID] = useState("")
@@ -38,6 +38,7 @@ export function ConsultationCard({consultation}) {
 
         if (createResponse && createResponse != undefined){
             console.log("Success sign-up on consultation")
+            setSuccessSignupPopupActive(true)
             setSignedUp([...signedUp, consultation.id])
         }
     }
@@ -76,7 +77,10 @@ export function ConsultationCard({consultation}) {
             {
                 userRole == "student" && !SignedUp()
                 ?
-                <button id='signup-on-cons-btn' onClick={() => SignupOnConsultation()}>Записаться</button>
+                <button id='signup-on-cons-btn' onClick={(e) => {
+                    e.preventDefault()
+                    SignupOnConsultation()
+                }}>Записаться</button>
                 :
                 // <p className='already-signedup'>Вы уже записались</p>
                 <></>

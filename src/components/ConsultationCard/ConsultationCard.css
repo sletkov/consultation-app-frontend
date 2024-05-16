@@ -60,6 +60,7 @@
     padding: 5px;
     margin-top: 10px;
     cursor: pointer;
+    z-index: 1000;
 }
 
 #signup-on-cons-btn:hover {

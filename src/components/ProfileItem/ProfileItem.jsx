@@ -30,13 +30,13 @@ export const ProfileItem = () => {
 
             <div className={active? "profile-item__accordeon active" : "profile-item__accordeon"}>
 
-                <div className="popup">
-                    <div className="popup__content">
-                        <a href="/profile" className="popup__link"><FaUserCircle/>Профиль</a>                    
-                        <a href="/my-consultations" className="popup__link"><FaClipboardList/>Мои консультации</a>
-                        <button className="popup__btn" onClick={() => {Logout()}}><RiLogoutBoxFill/>Выйти</button>  
+                <div className="profile-menu">
+                    <div className="profile-menu__content">
+                        <a href="/profile" className="profile-menu__link"><FaUserCircle/>Профиль</a>                    
+                        <a href="/my-consultations" className="profile-menu__link"><FaClipboardList/>Мои консультации</a>
+                        <button className="profile-menu__btn" onClick={() => {Logout()}}><RiLogoutBoxFill/>Выйти</button>  
                     </div>
-                    <button onClick={()=>setActive(false)} className="popup__close-btn"><IoMdClose/></button>
+                    <button onClick={()=>setActive(false)} className="profile-menu__close-btn"><IoMdClose/></button>
                 </div>
             </div>
         </div>

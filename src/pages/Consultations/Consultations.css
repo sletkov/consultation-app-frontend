@@ -83,3 +83,8 @@
 .count-select {
     padding: 5px;
 }
+
+.success-create-popup, .success-signup-popup {
+    background-color:#55B432;
+    color: #fff;
+}

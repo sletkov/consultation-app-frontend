@@ -25,20 +25,20 @@
     height: 200px;
 }
 
-.popup {
+.profile-menu {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     padding: 5%;
 }
 
-.popup__content {
+.profile-menu__content {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.popup__link {
+.profile-menu__link {
     color: #fff;
     text-decoration: none;
     font-size: 25px;
@@ -47,12 +47,12 @@
     gap: 5px;
 }
 
-.popup__link:hover {
+.profile-menu__link:hover {
     text-decoration: underline;
     transform:translateX(-5px);
 }
 
-.popup__btn {
+.profile-menu__btn {
     background: none;
     border: none;
     color: #fff;
@@ -64,12 +64,12 @@
     gap: 5px;
 }
 
-.popup__btn:hover {
+.profile-menu__btn:hover {
     text-decoration: underline;
     transform:translateX(-5px);
 }
 
-.popup__close-btn {
+.profile-menu__close-btn {
     color: #fff;
     background: none;
     cursor: pointer;
@@ -77,7 +77,7 @@
     font-size: 30px;
 }
 
-.popup__close-btn:hover {
+.profile-menu__close-btn:hover {
    transform: scale(1.1);
 }
 
