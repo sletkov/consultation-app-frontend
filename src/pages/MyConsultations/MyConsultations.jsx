@@ -61,6 +61,9 @@ export const MyConsultations = () => {
                 <div className="my-consultations__btns">
                     <button className={!showDrafts ? "active-btn": "my-consultations__active-btn"} onClick={()=>{
                         fetchConsultations()
+                        // if (consultations.length != 0) {
+                        //     setConsultations(consultations.filter((cons) => cons.draft == false))
+                        // }
                         setShowDrafts(false)
                     }}>Активные</button>
 

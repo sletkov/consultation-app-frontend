@@ -1,0 +1,36 @@
+.page-not-found {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    color: #fff;
+}
+
+.page-not-found__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    width: 500px;
+}
+
+.page-not-found__logos {
+    display: flex;
+    gap: 20px;
+}
+
+.page-not-found__logo-circle {
+    width: 100px;
+    height: 100px;
+}
+
+.page-not-found__logo-text {
+    height: 100px;
+}
+
+.page-not-found__heading {
+    width: 500px;
+    font-size: 28px;
+    text-align: center;
+}

@@ -2,50 +2,25 @@ import "./CreateConsultationForm.css"
 import {Modal} from "../UI/Modal/Modal"
 import { IoMdClose } from "react-icons/io";
 import { useState } from "react";
-import axios from "axios";
 
-export const CreateConsultationForm = ({active, setActive, setSuccessCreatePopupActive}) => {
-    const [consultation, setConsultation] = useState({})
-
+export const CreateConsultationForm = ({active, setActive, setSuccessCreatePopupActive, fetchConsultations}) => {
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [format, setFormat] = useState("Очно")
     const [type, setType] = useState("Консультация")
     const [date, setDate] = useState("")
     const [time, setTime] = useState("")
-    const [campus, setCampus] = useState("")
+    const [campus, setCampus] = useState("БС")
     const [classroom, setClassroom] = useState("")
     const [link, setLink] = useState("")
     const [limit, setLimit] = useState(10)
     const [draft, setDraft] = useState(false)
-
-    // teacherID = 
-    // async function CreateConsultation(){
-    //     let body =JSON.stringify({
-    //         title: title,
-    //         description: description,
-    //         format: format,
-    //         type: type,
-    //         // teacher_id: teacherID,
-    //         date: date,
-    //         campus: campus,
-    //         classroom: classroom,
-    //         students_limit: limit,
-    //     })
-    //     console.log(body)
-    //     let createConsultationResponse = await axios.post("http://localhost:8080/private/consultations", {
-    //         body,
-    //     }).then((response) => {
-    //         if (response.status == 200) {
-    //             console.log("Create consultation OK")
-    //         }
-    //     })
-    // }
-
     
+
     async function CreateConsultation() {
         let teacherID = localStorage.getItem("userID")
         let teacherName = localStorage.getItem("userName")
+        
         let body = JSON.stringify({
             title: title,
             description: description,
@@ -59,10 +34,9 @@ export const CreateConsultationForm = ({active, setActive, setSuccessCreatePopup
             link: link,
             limit: limit,
             teacher_name: teacherName,
-            draft:draft,
+            draft: draft,
         })
 
-        console.log(body)
         const createResponse = await fetch('http://localhost:8080/private/consultations', {
             method: "POST",
             mode: "no-cors",
@@ -78,8 +52,8 @@ export const CreateConsultationForm = ({active, setActive, setSuccessCreatePopup
 
         if (createResponse && createResponse !== undefined){
             setSuccessCreatePopupActive ? setSuccessCreatePopupActive(true):
-       
-            console.log("Success create consultation")
+            <></>
+            fetchConsultations()
         }
         
     }
@@ -132,6 +106,11 @@ export const CreateConsultationForm = ({active, setActive, setSuccessCreatePopup
                     Формат
                     <select value={format} onChange={(e)=> {
                         setFormat(e.target.value)
+                        if (format == "Онлайн") {
+                            setCampus("")
+                            setClassroom("")
+                        }
+
                     }} name="" id="">
                         <option value="Очно">Очно</option>
                         <option value="Онлайн">Онлайн</option>
@@ -186,7 +165,7 @@ export const CreateConsultationForm = ({active, setActive, setSuccessCreatePopup
 
 
                 {
-                    format== "Онлайн"?
+                    format == "Онлайн"?
                     <label className="form-label">
                         Ссылка для подключения
                         <input value={link} onChange={(e)=> {

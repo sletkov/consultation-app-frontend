@@ -116,7 +116,6 @@ export const Consultation = () => {
             // fetchConsultation()
         }
     }
-
     
     async function deleteConsultation() {
         var teacherID = localStorage.getItem("userID")
@@ -124,8 +123,7 @@ export const Consultation = () => {
             teacher_id: teacherID,
         })
 
-        console.log(body)
-        const createResponse = await fetch('http://localhost:8080/private/consultations/delete/'+consultation.id, {
+        const deleteResponse = await fetch('http://localhost:8080/private/consultations/delete/' + consultation.id, {
             method: "POST",
             mode: "no-cors",
             headers: {
@@ -137,7 +135,7 @@ export const Consultation = () => {
             return response.json
         })
 
-        if (createResponse && createResponse !== undefined){
+        if (deleteResponse && deleteResponse !== undefined){
            console.log("Success delete consultation")
            navigate("/consultations")
         }

@@ -4,3 +4,84 @@
     flex-direction: column;
     gap: 10px;
 }
+.profile__container--header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.set-new-pass-btn {
+    height: 40px;
+    width: 240px;
+    align-self: flex-start;
+    background-color: #1E1E1E;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+}
+
+.set-new-pass-btn:hover {
+    background-color: #fff;
+    border:  1px solid black !important;
+    color: #1E1E1E;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.update-pass__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.update-pass-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    width: 30vw;
+}
+
+.update-pass-form__label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.update-pass-btn {
+    min-height: 40px;
+    width: 200px;
+    align-self: end;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.update-pass-btn:hover {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000; 
+}
+
+.profile__email {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.profile__email__header {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.edit-btn {
+    align-self: flex-start;
+}
+
+.edit-email-label {
+    display: flex;
+    gap: 5px
+}

@@ -1,46 +1,48 @@
 import './Consultations.css'
 import { IoMdClose } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io"
+import { IoIosArrowBack} from "react-icons/io"
 import { Header } from "../../components/Header/Header";
 import { ConsultationCard } from "../../components/ConsultationCard/ConsultationCard";
 import { CreateConsultationForm } from '../../components/CreateConsultationForm/CreateConsultationForm';
 import { Popup } from "../../components/UI/Popup/Popup";
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-import { ConsultationService } from '../../API/ConsultationService';
 
 
 export function Consultations() {
     const [consultations, setConsultations] = useState([])
+    const [searchedCons, setSearchedCons] = useState(consultations)
     const [modalActive, setModalActive] = useState(false)
     const [userID, setUserID] = useState("")
     const [consultationID, setConsultationID] = useState("")
     const [userRole, setUserRole] = useState("")
     const [successCreatePopupActive, setSuccessCreatePopupActive] = useState(false)
     const [successSignupPopupActive, setSuccessSignupPopupActive] = useState(false)
-    const [searchConsultation, setSearchConsultation] = useState({
+    const [searchQuery, setSearchQuery] = useState({
         title: "",
         campus: "",
+        type: "",
         format: "",
+        date: ""
     })
 
     const [page, setPage] = useState(1)
-    const [consOnPage, setConsOnPage] = useState(50)
+    const [consOnPage, setConsOnPage] = useState(2)
+    const [totalPages, setTotalPages] = useState(searchedCons.length / consOnPage)
+    // const [totalPages, setTotalPages] = useState(100)
 
-    async function fetchConsultations(page, consOnPage) {
-
-        var response = await axios.get("http://localhost:8080/private/consultations", {
-            // params:{
-            //     page: page,
-            //     limit: consOnPage,
-            // },
+    async function fetchConsultations() {
+        let response = await axios.get("http://localhost:8080/private/consultations", {
             withCredentials:true, 
         })
+        
         console.log(response.data)
         console.log(response.status)
         if (response.status == 200 && response.data) {
             setConsultations(response.data)
+            setSearchedCons(response.data)
         }
-        console.log(consultations)
     }
  
 
@@ -49,72 +51,52 @@ export function Consultations() {
         fetchConsultations()
         setUserRole(localStorage.getItem("userRole"))
         setUserID(localStorage.getItem("userID"))
-        console.log("useEffect")
     },[])
 
-    // async function SignupOnConsultation() {
-    //     let body = JSON.stringify({
-    //         user_id: userID,
-    //         consultation_id: consultationID,
-    //     })
-    //     const createResponse = await fetch('http://localhost:8080/private/consultations/sign-up', {
-    //         method: "POST",
-    //         mode: "no-cors",
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //           },
-    //         body: body,
-    //         credentials: 'include'
-    //     }).then((response)=>{
-    //         return response.json
-    //     })
+    useEffect(() => {
+        filterAndSearch()
+    },[searchQuery])
 
-    //     if (createResponse && createResponse !== undefined){
-    //        console.log("Success sign-up")
-    //     }
-    // }
+    // useEffect(() => {
+    //     setTotalPages(Math.ceil(searchedCons.length / consOnPage))
+    //     // setTotalPages(100)
+    // },[searchedCons, consOnPage])
 
-    //Может быть поиск и фильтры в отдельный компонент?
-    function searchConsultations(title) {
-        // includes(title
-        var searchedCons = consultations.filter(item => item.title.toLowerCase().trim().includes(title.toLowerCase().trim()))
-        setConsultations(searchedCons)
-        if (title.length == 0) {
-            fetchConsultations()
+    // useEffect(() => {
+    //     console.log(page)
+    //     console.log(consOnPage)
+
+    //     setSearchedCons(searchedCons.slice(page * consOnPage, page * consOnPage + consOnPage ))
+    // },[page])
+
+
+
+    function filterAndSearch() {
+        let searchedAndFilteredCons = [...consultations]
+        if (searchQuery.title.length != 0) {
+            searchedAndFilteredCons = consultations.filter(item => item.title.toLowerCase().trim().includes(searchQuery.title.toLowerCase().trim()))
         }
-    }
 
-    function filterConsultationsByCampus(campus) {
-        var searchedCons  = consultations.filter(item => item.campus == campus)
-        setConsultations(searchedCons)
-        if (campus == "Все корпуса") {
-            fetchConsultations()
+        if (searchQuery.campus != "Все корпуса" && searchQuery.campus != "") {
+            searchedAndFilteredCons = searchedAndFilteredCons.filter(item => item.campus == searchQuery.campus)
         }
-    }
 
-    
-    function filterConsultationsByType(type) {
-        var searchedCons  = consultations.filter(item => item.type == type)
-        setConsultations(searchedCons)
-        if (type == "Любой тип") {
-            fetchConsultations()   
+        
+        if (searchQuery.type != "Любой тип" && searchQuery.type != "") {
+            searchedAndFilteredCons = searchedAndFilteredCons.filter(item => item.type == searchQuery.type)
         }
-    }
 
-    function filterConsultationsByFormat(format) {
-        var searchedCons  = consultations.filter(item => item.format == format)
-        setConsultations(searchedCons)
-        if (format == "Любой формат") {
-            fetchConsultations()
+        
+        if (searchQuery.format != "Любой формат" && searchQuery.format != "") {
+            searchedAndFilteredCons = searchedAndFilteredCons.filter(item => item.format == searchQuery.format)
         }
-    }
 
-    function filterConsultationsByDate(date) {
-        var searchedCons  = consultations.filter(item => item.date == date)
-        setConsultations(searchedCons)
-        if (date == 0) {
-            fetchConsultations()
+        
+        if (searchQuery.date != 0) {
+            searchedAndFilteredCons = searchedAndFilteredCons.filter(item => item.date == searchQuery.date)
         }
+
+        setSearchedCons(searchedAndFilteredCons)
     }
 
     return(
@@ -142,13 +124,16 @@ export function Consultations() {
             </div>
           
             <label className='consultations__search'>
-                <input  className='consultations__search-input' type='search' placeholder="Поиск" onChange={(e) => searchConsultations(e.target.value)}/>
-                {/* Возможно ненужная кнопка */}
-                <button type='reset'className='consultations__search-btn' onClick={() => searchConsultations()}>Найти</button>
+                <input  className='consultations__search-input' type='search' placeholder="Поиск" onKeyDownCapture={(e) => {
+                    setSearchQuery({...searchQuery, title: e.target.value})
+                }}/>
+                <button type='reset'className='consultations__search-btn'>Найти</button>
             </label>
 
             <div className='consultations__filters'>
-                <select className="campus-select" name="" id="" onChange={(e) => filterConsultationsByCampus(e.target.value)}>
+                <select className="campus-select" name="" id="" onChange={(e) => {
+                    setSearchQuery({...searchQuery, campus: e.target.value})
+                    }}>
                     <option value="Все корпуса">Все корпуса</option>
                     <option value="БС">БС</option>
                     <option value="Прянишникова">Прянишникова</option>
@@ -156,20 +141,26 @@ export function Consultations() {
                     <option value="Автозаводская">Автозаводская</option>
                 </select>
 
-                <select className="type-select" name="" id="" onChange={(e) => filterConsultationsByType(e.target.value)}>
+                <select className="type-select" name="" id="" onChange={(e) => {
+                    setSearchQuery({...searchQuery, type: e.target.value})
+                    }}>
                     <option value="Любой тип">Любой тип</option>
                     <option value="Консультация">Консультация</option>
                     <option value="Пересдача">Пересдача</option>
                     <option value="Отработка">Отработка</option>
                 </select>
 
-                <select className="format-select" name="" id="" onChange={(e) => filterConsultationsByFormat(e.target.value)}>
+                <select className="format-select" name="" id="" onChange={(e) => {
+                    setSearchQuery({...searchQuery, format: e.target.value})
+                    }}>
                     <option value="Любой формат">Любой формат</option>
                     <option value="Очно">Очно</option>
                     <option value="Онлайн">Онлайн</option>
                 </select>
 
-                <input className="date-input" type="date" />
+                <input className="date-input" type="date" onChange={(e) => {
+                    setSearchQuery({...searchQuery, date: e.target.value})
+                }} />
 
                 <select className="count-select" name="" id="" value={consOnPage} onChange={(e) => (
                     setConsOnPage(Number(e.target.value),
@@ -179,19 +170,78 @@ export function Consultations() {
                     <option value="50">50</option>
                     <option value="100">100</option>
                 </select>
+
             </div>
            
-            <CreateConsultationForm active={modalActive} setActive={setModalActive} setSuccessCreatePopupActive={setSuccessCreatePopupActive}/>
+           {
+            totalPages > 1 
+            ?
+
+            <div className='pagination'>
+                <button disabled={page == 1} onClick={()=>setPage(page -1)} className='previous-page-btn'><IoIosArrowBack className='arrow-back'/></button>
+                <div className='page-links'>
+                    {
+                        totalPages > 10 ?
+                        <div className='pagination-slice'>
+                            <p key={1} onClick={() => {
+                                setPage(1)
+                            }} className={page == 1 ? "page-link--active" : "page-link"}>{1}</p>
+                            <p>...</p>
+                        </div>
+                        :
+                        <></>
+                    }
+                    
+                    {
+                        [...Array(totalPages)].map((el, idx) => {
+                            if (totalPages > 10) {
+                                if ( idx + 1 != 1 && idx + 1 != 100 && idx <= page + 4 && idx >= page - 4) {
+                                    return <p key={idx} onClick={() => {
+                                        setPage(idx + 1)
+                                        console.log(idx)
+                                    }} className={page == idx + 1 ? "page-link--active" : "page-link"}>{idx + 1}</p>  
+                                } 
+                            }else {
+                                return <p key={idx} onClick={() => {
+                                    setPage(idx + 1)
+                                    console.log(idx)
+                                }} className={page == idx + 1 ? "page-link--active" : "page-link"}>{idx + 1}</p>
+                            }
+                           
+                        })
+
+
+                    }
+
+                        {totalPages > 10 ?
+                        <div className='pagination-slice'>
+                            <p>...</p>
+                            <p key={totalPages} onClick={() => {
+                                setPage(totalPages)
+                            }} className={page == totalPages ? "page-link--active" : "page-link"}>{totalPages}</p>  
+                        </div>
+
+                        :
+                        <></>
+                        }
+                    </div>
+                    <button disabled={page == totalPages} onClick={()=>setPage(page + 1)} className='next-page-btn'><IoIosArrowForward className='arrow-forward'/></button>
+                </div>
+
+                :
+                <></>
+            }
+            <CreateConsultationForm active={modalActive} setActive={setModalActive} setSuccessCreatePopupActive={setSuccessCreatePopupActive} fetchConsultations={fetchConsultations}/>
 
             {
-            consultations.length != 0 ?
+            searchedCons.length != 0 ?
             <div className="consultations__container">
-                {consultations.map((cons) => {
+                {searchedCons.map((cons) => {
                     return <ConsultationCard key={cons.id} consultation = {cons} setSuccessSignupPopupActive={setSuccessSignupPopupActive}/>
                 })}
             </div>
             :
-            <div>Консультаций пока нет...</div>
+            <div className='emtpy-list'>Консультаций пока нет...</div>
             }
 
         </div>

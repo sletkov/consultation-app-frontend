@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {PageNotFound} from './pages/PageNotFound/PageNotFound';
 import {Login} from './pages/Login/Login';
 import {Signup} from './pages/Signup/Signup'
 import {SignupTeacher} from './pages/SignupTeacher/SignupTeacher'
@@ -34,6 +35,7 @@ function App() {
             <Route element={<Signup/>} path="/sign-up"/>
             <Route element={<SignupTeacher/>} path="/sign-up/teacher"/>
             <Route element={<SignupStudent/>} path="/sign-up/student"/>
+            <Route element={<PageNotFound/>} path='*'/>
           </Routes>
         </Router>
       </div>

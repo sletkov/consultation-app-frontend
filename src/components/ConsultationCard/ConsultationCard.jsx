@@ -70,8 +70,17 @@ export function ConsultationCard({consultation, setSuccessSignupPopupActive}) {
                 <p>Преподаватель: {consultation.teacher_name}</p>
                 <p>Дата: {consultation.date}</p>
                 <p>Время: {consultation.time}</p>
-                <p>Корпус: {consultation.campus}</p>
-                <p>Аудитория: {consultation.classroom}</p>
+                {
+                    consultation.format == "Очно"?
+                    <div className='irl-format-data'>
+                        <p>Корпус: {consultation.campus}</p>
+                        <p>Аудитория: {consultation.classroom}</p>
+                    </div>
+
+                    :
+                    <></>
+                }
+
                 <p>Кол-во записей: {consultation.students_count}/{consultation.limit}</p>
             </div>
             {
